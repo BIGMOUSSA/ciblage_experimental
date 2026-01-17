@@ -12,12 +12,12 @@ def load_and_preprocess_data(train_path, test_path, index_col):
     Returns:
         tuple: Preprocessed train and test DataFrames.
     """
-    col = ['partage_sanitaire',
+    col = [#'partage_sanitaire',
             'source_eau_ss',
             'age',
             'statut_occup',
             'ventilo',
-            'evac_eau_usees',
+            #'evac_eau_usees',
             'eclairage',
             'fer_electrique',
             'nature_sol',
@@ -27,7 +27,7 @@ def load_and_preprocess_data(train_path, test_path, index_col):
             'materiau_mur',
             'voiture',
             'sexe',
-            'mode_evac_ordure',
+            #'mode_evac_ordure',
             'fer_charbon',
             'ordinateur',
             'tx_promiscuite',
@@ -51,7 +51,7 @@ def load_and_preprocess_data(train_path, test_path, index_col):
     # Convert categorical columns to category dtype
     cat_cols = ['source_eau_ss', 'statut_occup', 'ventilo', 'eclairage', 'fer_electrique',
                 'nature_sol', 'materiau_toit', 'type_logement', 'type_sanitaire',
-                'materiau_mur', 'mode_evac_ordure', 'fer_charbon', 'ordinateur',
+                'materiau_mur', 'fer_charbon', 'ordinateur',
                 'region']
     # convert to categorical data type for columns in 'rg_col'
     train[cat_cols] = train[cat_cols].astype('category')
