@@ -1,0 +1,11 @@
+Model Leaderboard urban:
+                 model  score_test  score_val eval_metric  pred_time_test  pred_time_val  fit_time  pred_time_test_marginal  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
+0  RandomForest_BAG_L1    0.679045   0.587342          f1        0.063527       0.157541  0.596475                 0.063527                0.157541           0.596475            1       True          1
+1  WeightedEnsemble_L2    0.673684   0.594872          f1        0.139193       0.356472  1.155783                 0.001593                0.002085           0.073654            2       True          3
+2  WeightedEnsemble_L3    0.656489   0.618623          f1        0.268055       0.667325  2.371044                 0.002007                0.001851           0.125457            3       True          6
+3  RandomForest_BAG_L2    0.651515   0.607171          f1        0.200664       0.509027  1.679798                 0.063064                0.154641           0.597669            2       True          4
+4    ExtraTrees_BAG_L1    0.650919   0.573657          f1        0.074073       0.196846  0.485654                 0.074073                0.196846           0.485654            1       True          2
+5    ExtraTrees_BAG_L2    0.644501   0.594108          f1        0.202984       0.510833  1.647918                 0.065384                0.156446           0.565789            2       True          5
+
+Results on test set:
+{'f1': 0.6564885496183206, 'accuracy': 0.8278061224489796, 'balanced_accuracy': np.float64(0.8044210323760043), 'mcc': 0.554201296739671, 'roc_auc': np.float64(0.9127387309376052), 'precision': 0.5758928571428571, 'recall': 0.7633136094674556}

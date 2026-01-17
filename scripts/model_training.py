@@ -1,6 +1,6 @@
 from autogluon.tabular import TabularPredictor
 
-def train_and_evaluate_model(train_data, test_data, label_column, output_dir, milieu):
+def train_and_evaluate_model(train_data, test_data, label_column, output_dir, milieu, result):
     """
     Train and evaluate a model using AutoGluon with optimization and a progress bar.
 
@@ -25,7 +25,7 @@ def train_and_evaluate_model(train_data, test_data, label_column, output_dir, mi
         "CAT": { }
     }
 
-    predictor = TabularPredictor(label=label_column, eval_metric="f1", path=output_dir).fit(train_data,presets="best_quality",time_limit= 10*60, hyperparameters=hyperparameters, verbosity=3)
+    predictor = TabularPredictor(label=label_column, eval_metric="f1", path=output_dir).fit(train_data,presets="best_quality",time_limit= 1*60, hyperparameters=hyperparameters, verbosity=3)
 
         # Evaluate the model
     leaderboard = predictor.leaderboard(test_data, silent=True)
@@ -35,9 +35,18 @@ def train_and_evaluate_model(train_data, test_data, label_column, output_dir, mi
     results = predictor.evaluate(test_data, auxiliary_metrics=True, silent=True)
     print(f" {milieu} :  {results}")
     # save results to a file
-    with open(f"{output_dir}/results_{milieu}.txt", "w") as f:
+    import os
+
+    os.makedirs(result, exist_ok=True)
+
+    results_path = os.path.join(result, f"results_{milieu}.txt")
+
+    with open(results_path, "w") as f:
         f.write(f"Model Leaderboard {milieu}:\n")
         f.write(leaderboard.to_string())
-        f.write(f"\n\nResults on test set:\n{results}\n")
-    
-    
+        f.write("\n\nResults on test set:\n")
+        f.write(str(results))
+
+    print(f"✅ Results written to {results_path}")
+        
+

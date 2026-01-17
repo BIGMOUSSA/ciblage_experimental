@@ -22,11 +22,11 @@ if args.milieu == "rural":
     rural_train, rural_test = load_and_preprocess_data(rural_train_path, rural_test_path, index_column)
 
     print("Training and evaluating model for rural data...")
-    train_and_evaluate_model(rural_train, rural_test, label_column, output_dir="models/rural", milieu="rural")
+    train_and_evaluate_model(rural_train, rural_test, label_column, output_dir="models/rural", milieu="rural", result="output_dir")
 
 elif args.milieu == "urbain":
     print("Processing urban data...")
     urban_train, urban_test = load_and_preprocess_data(urban_train_path, urban_test_path, index_column)
 
     print("Training and evaluating model for urban data...")
-    train_and_evaluate_model(urban_train, urban_test, label_column, output_dir="models/urban", milieu="urban")
+    train_and_evaluate_model(urban_train, urban_test, label_column, output_dir="models/urban", milieu="urban", result="output_dir")
