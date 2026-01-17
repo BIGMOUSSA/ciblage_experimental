@@ -1,0 +1,49 @@
+name: AutoGluon Training (Urban / Rural)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    strategy:
+      matrix:
+        milieu: [rural, urban]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run training (${{ matrix.milieu }})
+      run: |
+        if [ "${{ matrix.milieu }}" = "rural" ]; then
+          python main_train.py --rural
+        else
+          python main_train.py --urban
+        fi
+
+    - name: Upload model artefact (${{ matrix.milieu }})
+      uses: actions/upload-artifact@v4
+      with:
+        name: model-${{ matrix.milieu }}
+        path: models/${{ matrix.milieu }}/
