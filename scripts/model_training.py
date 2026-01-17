@@ -17,13 +17,14 @@ def train_and_evaluate_model(train_data, test_data, label_column, output_dir, mi
         # Train the model with hyperparameter optimization and progress tracking
     hyperparameters={
         "RF": [
-            {"criterion": "entropy"}  # RandomForestEntr
+            {}  # RandomForestEntr
         ],
         "XT": [
             {}                         # ExtraTrees (meilleur sera sélectionné)
         ],
-        "ENSEMBLE": {}                # WeightedEnsemble
+        "CAT": { }
     }
+
     predictor = TabularPredictor(label=label_column, eval_metric="f1", path=output_dir).fit(train_data,presets="best_quality",time_limit= 10*60, hyperparameters=hyperparameters, verbosity=3)
 
         # Evaluate the model
@@ -33,3 +34,10 @@ def train_and_evaluate_model(train_data, test_data, label_column, output_dir, mi
     print(f"resultats model {milieu} on test set")
     results = predictor.evaluate(test_data, auxiliary_metrics=True, silent=True)
     print(f" {milieu} :  {results}")
+    # save results to a file
+    with open(f"{output_dir}/results_{milieu}.txt", "w") as f:
+        f.write(f"Model Leaderboard {milieu}:\n")
+        f.write(leaderboard.to_string())
+        f.write(f"\n\nResults on test set:\n{results}\n")
+    
+    
