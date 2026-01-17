@@ -1,0 +1,5 @@
+streamlit
+pandas
+autogluon.tabular==0.8.2
+scikit-learn
+numpy
