@@ -39,7 +39,7 @@ jobs:
         if [ "${{ matrix.milieu }}" = "rural" ]; then
           python main_train.py --milieu rural
         else
-          python main_train.py --milieu urban
+          python main_train.py --milieu urbain
         fi
 
     - name: Upload model artefact (${{ matrix.milieu }})
