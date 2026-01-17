@@ -23,7 +23,7 @@ def train_and_evaluate_model(train_data, test_data, label_column, output_dir, mi
         "CAT": {}
     }
 
-    predictor = TabularPredictor(label=label_column, eval_metric="precision", path=output_dir).fit(train_data,presets="best_quality",time_limit= 10*60, hyperparameters=hyperparameters, verbosity=3)
+    predictor = TabularPredictor(label=label_column, eval_metric="precision", path=output_dir).fit(train_data,presets="best_quality",time_limit= 10*60)
 
         # Evaluate the model
     leaderboard = predictor.leaderboard(test_data, silent=True)
